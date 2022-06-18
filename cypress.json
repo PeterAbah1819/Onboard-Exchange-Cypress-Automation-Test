@@ -1,0 +1,10 @@
+{
+    "ignoreTestFiles": "**/examples/*.js",
+    "baseUrl": "https://preprod.onemedtest.com/",
+    "viewportWidth": 2000,
+    "viewportHeight": 1500,
+    "testFiles": "**/*.spec.*",
+    "retries": 0,
+    "projectId": "5rwr1c"
+  }
+  

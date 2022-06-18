@@ -1,0 +1,14 @@
+{
+  "name": "cypress-tester",
+  "version": "1.0.0",
+  "description": "Tester",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Femi",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "9.5.4"
+  }
+}

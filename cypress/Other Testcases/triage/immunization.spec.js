@@ -1,0 +1,16 @@
+describe('Immunization',()=>{
+    it('Immunization triage',()=>{
+        cy.login()
+        cy.patientTriage()
+        cy.contains('Immunization').click()
+        cy.get('[name="vaccineImmunization_0"]').click()
+        cy.get('.ui-select-choices-row').first().click()
+        cy.get('[name="vaccineDose_0"]').type('0.5ml')
+        cy.get('datetimepicker>[name="vaccineReceivedOn_0"]').first().click()
+        cy.contains('Today').click()
+        cy.get('datetimepicker>[name="vaccineExpiryDate_0"]').first().click()
+        cy.contains('Today').click()
+        cy.get('[name="vaccineBatchNo_0"]').type('BA-012')
+        cy.get('.form-buttons').contains('Submit').click()
+    })
+})

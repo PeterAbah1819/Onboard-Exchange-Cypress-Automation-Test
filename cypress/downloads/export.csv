@@ -1,0 +1,6 @@
+Date,Patient,Folio Number,Age,Gender,Doctor,ICD 10,Conditions,Tags,Insurance,Deceased,Department,Dependency
+17 Jun 2022,Oleksandr Abelentsev,,21 yrs,male,Helium Admin,H16072,"Perforated corneal ulcer, left eye",,Private Patient,false,,principal
+17 Jun 2022,Patient Principal,,27 yrs,female,Helium Admin,S42223S,"2-part displaced fracture of surgical neck of unspecified humerus, sequela",Cypress Tester Tag,Test,false,,principal
+17 Jun 2022,Patient Principal,,27 yrs,female,Helium Admin,S42221K,"2-part displaced fracture of surgical neck of right humerus, subsequent encounter for fracture with nonunion",Cypress Tester Tag,Test,false,,principal
+17 Jun 2022,Patient Principal,,27 yrs,female,Helium Admin,S0240BA,"Malar fracture, left side, initial encounter for closed fracture",Cypress Tester Tag,Test,false,,principal
+17 Jun 2022,Patient Principal,,27 yrs,female,Helium Admin,S0240BA,"Malar fracture, left side, initial encounter for closed fracture",Cypress Tester Tag,Test,false,,principal

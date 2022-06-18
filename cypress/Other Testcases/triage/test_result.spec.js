@@ -1,0 +1,15 @@
+describe('Results',()=>{
+    it('Add test results',()=>{
+        cy.login()
+        cy.patientTriage()
+        cy.contains('Test Result').click()
+        cy.get('.LabTestsSelectInfinite__container').first().click()
+        cy.get('li').first().click()
+        cy.get('datetimepicker>[name="collectedAt"]').first().click()
+        cy.contains('Today').click()
+        cy.contains('Now').click()
+        cy.get('[placeholder="Enter Sample No."]').type('LAB-0910')
+        cy.get('[name="result"]').type('0.6')
+        cy.get('.form-buttons').contains('Submit').click()
+    })
+})
