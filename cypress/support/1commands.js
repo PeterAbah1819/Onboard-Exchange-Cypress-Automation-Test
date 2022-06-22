@@ -18,7 +18,8 @@ Cypress.Commands.add('login', () => {
     cy.visit('/login');
     cy.get('[name="emailOrPhone"]').clear().type('marybassey@hospital.com', { delay: 100 })
     cy.get('[name="password"]').type('password', { delay: 100 })
-    cy.get('.Login__submit-btn').click().wait(5000)
+    cy.get('.Login__submit-btn').click()
+    cy.get('.submit-btn').click().wait(4000)
 
  
   });

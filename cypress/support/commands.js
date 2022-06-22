@@ -18,12 +18,13 @@ Cypress.Commands.add('login', () => {
     cy.route('POST', '**/api/doctor/sign-in').as('login');
     cy.visit('/login');
     //cy.get(':nth-child(1) > .AlmightyInput > .AlmightyInput__field').clear().type('Balogun25517')
-    cy.get('[data-cy="email"]').clear().type('admin@heliumhealth.ng')
+    cy.get('[data-cy="email"]').clear().type('peterabah@heliumhealth.com')
     //cy.get(':nth-child(2) > .AlmightyInput > .AlmightyInput__field').type('12345678')
-    cy.get('[data-cy="password"]').type('H16emr.preprod')
+    cy.get('[data-cy="password"]').type('password')
     cy.get('.btn-default').click()
     cy.get('#ui-select-choices-row-0-0 > .ui-select-choices-row-inner').click()
-    cy.get('[data-cy="submit"]').click().wait(5000)
+    cy.get('.Login__submit-btn').click().wait(4000)
+    //cy.get('.submit-btn').click().wait(4000)
 
 
 
