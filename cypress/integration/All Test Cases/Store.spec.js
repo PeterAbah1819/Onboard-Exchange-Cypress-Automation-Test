@@ -218,18 +218,18 @@ it('Create Procurement Order', function()
         cy.get('[for="procurementType"] > .multiselect > .multiselect__content-wrapper > .multiselect__content > :nth-child(1) > .multiselect__option > :nth-child(1) > .AlmightyDropdown__option').click()
 
         //Select product name
-        cy.get('.multiselect > .multiselect__tags > .multiselect__single').last().click().wait(2000)
-        cy.get('.multiselect > .multiselect__content-wrapper > .multiselect__content > :nth-child(1) > .multiselect__option > :nth-child(1) > .AlmightyDropdown__option > .AlmightyDropdown__option--main > span').last().click({force: true})
-
+        cy.get('.multiselect > .multiselect__tags > .multiselect__single').last().click()
+        cy.get('.multiselect__input').type('Cypress').wait(2000).type('{enter}')
+        
         //Enter Quantity
         cy.get('.AlmightyInput__field').click().type('10')
 
         //Select unit of measurement
-        cy.get('[for="unitOfMeasure_02208173-625a-4607-977c-8be4e72b9b0a"] > .multiselect > .multiselect__tags').click()
-        cy.get('[for="unitOfMeasure_02208173-625a-4607-977c-8be4e72b9b0a"] > .multiselect > .multiselect__tags').click()
+        cy.get('.multiselect > .multiselect__tags').last().click()
+        
 
         //Enter Unit price
-        cy.get('.AlmightyPrice__field').click().type(100)
+        cy.get('.AlmightyPrice__field').click().type('10')
 
 
         //Click on create
@@ -239,18 +239,29 @@ it('Create Procurement Order', function()
     })
 
 
+    
+
+
 it('Approve Procurement Order', function()
     {
+        //Login
         cy.logins()
-        cy.get('[ng-href="/procurements"]').click()
-        cy.get('[ui-sref="vendors"]').click()
-        cy.get('.subheader-splitted > :nth-child(1) > .header-link').click()
-        cy.get('[name="name"]').click().type('George Femi')
-        cy.get('[name="businessUnit"]').click().type('Pharmaceutical Company')
-        cy.get('[name="city"]').click().type('Lagos')
-        cy.get('[name="countryState"]').click().type('Nigeria')
-        cy.get('[name="phoneNumber"]').click().type('08169664373')
-        cy.get('[data-cy=FullPageModalActions__submit]').click()
+        //click on store module
+        cy.get('[ng-href="/store-requisitions"]').click()
+        //Click on the procurement
+        cy.get('.StoreHeader > div.header-splitted-col > .header-nav-tabs > [ui-sref="procurements"]').click().wait(2000)
+
+        cy.get('.ProcurementList').should('be.visible')
+        cy.get('.ProcurementList').should('contain.text', 'Approve')
+
+        //Click Approve
+        cy.get(':nth-child(1) > :nth-child(7) > .ProcurementListTable__content-actions > :nth-child(1)').click().wait(1000)
+
+        //Select item from the opening
+        cy.get('.AlmightyCheckbox__selector').click()
+        //Click Approve
+        cy.get('.ApprovalModalContent__approve').click()
+        
 
     })
 
