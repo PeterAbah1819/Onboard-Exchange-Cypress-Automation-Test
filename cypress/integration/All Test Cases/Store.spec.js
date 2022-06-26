@@ -199,7 +199,7 @@ it('Link Billing Item', function()
 it('Create Procurement Order', function()
     {
         //Login
-        cy.login()
+        cy.logins()
         //click on store module
         cy.get('[ng-href="/store-requisitions"]').click()
         //Click on the procurement
@@ -257,7 +257,7 @@ it('Approve Procurement Order', function()
         //Click Approve
         cy.get(':nth-child(1) > :nth-child(7) > .ProcurementListTable__content-actions > :nth-child(1)').click().wait(1000)
 
-        //Select item from the opening
+        //Select item from the modal
         cy.get('.AlmightyCheckbox__selector').click()
         //Click Approve
         cy.get('.ApprovalModalContent__approve').click()
@@ -268,16 +268,42 @@ it('Approve Procurement Order', function()
 
 it('Finalise Procurement Order', function()
     {
-        cy.logins()
-        cy.get('[ng-href="/procurements"]').click()
-        cy.get('[ui-sref="vendors"]').click()
-        cy.get('.subheader-splitted > :nth-child(1) > .header-link').click()
-        cy.get('[name="name"]').click().type('George Femi')
-        cy.get('[name="businessUnit"]').click().type('Pharmaceutical Company')
-        cy.get('[name="city"]').click().type('Lagos')
-        cy.get('[name="countryState"]').click().type('Nigeria')
-        cy.get('[name="phoneNumber"]').click().type('08169664373')
-        cy.get('[data-cy=FullPageModalActions__submit]').click()
+         //Login
+         cy.login()
+         //click on store module
+         cy.get('[ng-href="/store-requisitions"]').click()
+         //Click on the procurement
+         cy.get('.StoreHeader > div.header-splitted-col > .header-nav-tabs > [ui-sref="procurements"]').click().wait(2000)
+ 
+         cy.get('.ProcurementList').should('be.visible')
+         cy.get('.ProcurementList').should('contain.text', 'Receive')
+ 
+         //Click Receive
+         cy.get(':nth-child(1) > :nth-child(7) > .ProcurementListTable__content-actions > :nth-child(1)').click().wait(1000)
+ 
+         //Select item from the modal
+         cy.get(':nth-child(2) > :nth-child(7) > .ProcurementListTable__content-actions > :nth-child(1)').click().wait(1000)
+         //Enter Details
+         cy.get('.multiselect__tags').click()
+         cy.get('.AlmightyDropdown__option--main').click()
+
+         //Enter quantity
+         cy.get('#quantity_91ffc3ac-d6ea-43df-adc9-2928a554b0ca > .AlmightyInput__field').should('be.visible')
+         cy.get('#quantity_91ffc3ac-d6ea-43df-adc9-2928a554b0ca > .AlmightyInput__field').should('contain.text', 'Enter quantity').click().type('100')
+
+         //Batch no.
+         cy.get('#batchNo_91ffc3ac-d6ea-43df-adc9-2928a554b0ca > .AlmightyInput__field').click().type('12345')
+
+         //Batch date
+         cy.get('[for="batchDate"] > .AlmightyDatetimePicker__field').click()
+
+
+         //Exprity date
+         cy.get('[for="expiryDate"] > .AlmightyDatetimePicker__field').click()
+
+
+         //Click on finalise
+         cy.get('.ProcurementReceiveForm__finalize-button').click().wait(1000)
 
     })
 
