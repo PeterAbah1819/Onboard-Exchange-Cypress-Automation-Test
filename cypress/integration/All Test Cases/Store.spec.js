@@ -4,7 +4,7 @@ describe('Reports', function()
 
 it('Add New Item to Inventory', function()
     {
-        //Login
+        //logins
         cy.logins()
 
         //click on store module
@@ -49,7 +49,7 @@ it('Add New Item to Inventory', function()
 it('Add Batch of Item', function()
 
     {
-        //Login
+        //logins
         cy.logins()
         //click on store module
         cy.get('[ng-href="/store-requisitions"]').click()
@@ -105,7 +105,7 @@ it('Add Batch of Item', function()
 
 it('Adjust Item on Inventory', function()
     {
-        //Login
+        //logins
         cy.logins()
         //click on store module
         cy.get('[ng-href="/store-requisitions"]').click()
@@ -136,7 +136,7 @@ it('Adjust Item on Inventory', function()
 
 it('Filter & Export Inventory', function()
     {
-        //Login
+        //logins
         cy.logins()
         //click on store module
         cy.get('[ng-href="/store-requisitions"]').click()
@@ -172,7 +172,7 @@ it('Filter & Export Inventory', function()
 
 it('Link Billing Item', function()
     {
-        //Login
+        //logins
         cy.logins()
         //click on store module
         cy.get('[ng-href="/store-requisitions"]').click()
@@ -198,8 +198,8 @@ it('Link Billing Item', function()
 
 it('Create Procurement Order', function()
     {
-        //Login
-        cy.logins()
+        //logins
+        cy.login()
         //click on store module
         cy.get('[ng-href="/store-requisitions"]').click()
         //Click on the procurement
@@ -225,7 +225,7 @@ it('Create Procurement Order', function()
         cy.get('.AlmightyInput__field').click().type('10')
 
         //Select unit of measurement
-        cy.get('.multiselect > .multiselect__tags').last().click()
+        cy.get('.multiselect__placeholder').click().type('{enter}')
         
 
         //Enter Unit price
@@ -244,7 +244,7 @@ it('Create Procurement Order', function()
 
 it('Approve Procurement Order', function()
     {
-        //Login
+        //logins
         cy.logins()
         //click on store module
         cy.get('[ng-href="/store-requisitions"]').click()
@@ -266,14 +266,47 @@ it('Approve Procurement Order', function()
     })
 
 
+it('Filter Procurement order by Vendor Name, Status & Time', function()
+    {
+        //logins
+        cy.logins()
+        //click on store module
+        cy.get('[ng-href="/store-requisitions"]').click()
+        //click on the procurement
+        cy.get('.StoreHeader > div.header-splitted-col > .header-nav-tabs > [ui-sref="procurements"]').click().wait(2000)
+
+        //Filter by vendor
+        cy.get(':nth-child(1) > .ListFilter__wrapper > .ListFilter__opener > .ListFilter__opener-label').click()
+        cy.get(':nth-child(1) > [data-cy="AlmightyCheckbox"] > .AlmightyCheckbox__selector').click()
+        cy.get('.submit-btn').click()
+
+        //Filter by status
+        cy.get(':nth-child(2) > .ListFilter__wrapper > .ListFilter__opener > .ListFilter__opener-label').click()
+        cy.get(':nth-child(3) > .AlmightyRadio__option-label').click()
+        cy.get('.submit-btn').click()
+
+
+    })
+
+
 it('Finalise Procurement Order', function()
     {
-         //Login
-         cy.login()
-         //click on store module
-         cy.get('[ng-href="/store-requisitions"]').click()
-         //Click on the procurement
-         cy.get('.StoreHeader > div.header-splitted-col > .header-nav-tabs > [ui-sref="procurements"]').click().wait(2000)
+        //logins
+        cy.logins()
+        //click on store module
+        cy.get('[ng-href="/store-requisitions"]').click()
+        //Click on the procurement
+        cy.get('.StoreHeader > div.header-splitted-col > .header-nav-tabs > [ui-sref="procurements"]').click().wait(2000)
+
+        //Filter by vendor
+        cy.get(':nth-child(1) > .ListFilter__wrapper > .ListFilter__opener > .ListFilter__opener-label').click()
+        cy.get(':nth-child(1) > [data-cy="AlmightyCheckbox"] > .AlmightyCheckbox__selector').click()
+        cy.get('.submit-btn').click()
+
+        //Filter by status
+        cy.get(':nth-child(2) > .ListFilter__wrapper > .ListFilter__opener > .ListFilter__opener-label').click()
+        cy.get(':nth-child(3) > .AlmightyRadio__option-label').click()
+        cy.get('.submit-btn').click()
  
          cy.get('.ProcurementList').should('be.visible')
          cy.get('.ProcurementList').should('contain.text', 'Receive')
@@ -308,53 +341,42 @@ it('Finalise Procurement Order', function()
     })
 
 
-it('Filter Procurement order by Vendor Name, Status & Time', function()
-    {
-        cy.logins()
-        cy.get('[ng-href="/procurements"]').click()
-        cy.get('[ui-sref="vendors"]').click()
-        cy.get('.subheader-splitted > :nth-child(1) > .header-link').click()
-        cy.get('[name="name"]').click().type('George Femi')
-        cy.get('[name="businessUnit"]').click().type('Pharmaceutical Company')
-        cy.get('[name="city"]').click().type('Lagos')
-        cy.get('[name="countryState"]').click().type('Nigeria')
-        cy.get('[name="phoneNumber"]').click().type('08169664373')
-        cy.get('[data-cy=FullPageModalActions__submit]').click()
-
-    })
-
 
 it('View Requisitions', function()
     {
+        //logins
         cy.logins()
-        cy.get('[ng-href="/procurements"]').click()
+        //click on store module
+        cy.get('[ng-href="/store-requisitions"]').click()
+        //click on the requisitions
         cy.get('[ui-sref="storeRequisitions"]').click()
-        cy.get('.StoreRequisitionsTable__action-button').click()
-        cy.get('.AlmightyCheckbox__selector').click()
-        cy.get('.multiselect__select').click()
-        cy.get(':nth-child(1) > .multiselect__option > div').click()
-        cy.get('.AlmightyInput__field').click().type('300')
-        cy.get('.RequisitionModalFooter__approve').click()
+        //click to view details
+        cy.get(':nth-child(1) > :nth-child(6) > .RequisitionsTable__content-actions > .RequisitionsTable__action-button').click().wait(2000)
+        //Close modal
+        cy.get('.icon-close').click()
+       
     })
 
 
     it('View Adjustment History', function()
     {
+        //logins
         cy.logins()
-        cy.get('[ng-href="/procurements"]').click()
-        cy.get('[ui-sref="storeRequisitions"]').click()
-        cy.get('.StoreRequisitionsTable__action-button').click()
-        cy.get('.AlmightyCheckbox__selector').click()
-        cy.get('.multiselect__select').click()
-        cy.get(':nth-child(1) > .multiselect__option > div').click()
-        cy.get('.AlmightyInput__field').click().type('300')
-        cy.get('.RequisitionModalFooter__approve').click()
+        //click on store module
+        cy.get('[ng-href="/store-requisitions"]').click()
+        //click on the inventory
+        cy.get('.StoreHeader > .header-splitted-col > .header-nav-tabs > [ui-sref="storeInventory"]').click()
+        //Click on adjustment history
+        cy.get(':nth-child(3) > .header-link').click().wait(2000)
+        //Close page
+        cy.get('[data-cy="FullPageModalActions__submit"]').click()
+        
     })
 
 
 it('Manage/Add Vendors', function()
     {
-        //Login
+        //logins
         cy.logins()
         //click on store module
         cy.get('[ng-href="/store-requisitions"]').click()
